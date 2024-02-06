@@ -1,0 +1,12 @@
+{
+  "name": "int20h-auction-fe",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyberpOOP/int20h-auction-fe.git"
+  },
+  "license": "ISC"
+}
