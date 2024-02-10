@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MainComponent } from './main.component';
 import { MainContentComponent } from './main-content/main-content.component';
-import { AuthGuard } from '@core/guards/auth.guard';
 
 const routes: Routes = [
     {
@@ -13,15 +12,7 @@ const routes: Routes = [
             {
                 path: '',
                 component: MainContentComponent,
-            },
-            {
-                path: 'auth',
-                loadChildren: () => import('../auth/auth.module').then((m) => m.AuthModule),
-            },
-            //   {
-            //     path: '**',
-            //     component: NotFoundComponent,
-            //   },
+            }
         ],
     },
 ];
