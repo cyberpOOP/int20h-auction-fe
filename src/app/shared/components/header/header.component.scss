@@ -44,7 +44,10 @@
   position: relative;
 
   .avatar {
-    margin-right: 5px;
+    margin-right: 10px;
+    img {
+      height: 30px;
+    }
   }
 }
 .toggle-btn span {
@@ -52,6 +55,7 @@
 }
 
 .account-list {
+  display: none;
   position: absolute;
   top: 80px;
   background-color: #fff;
