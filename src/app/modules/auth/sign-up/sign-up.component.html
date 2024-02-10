@@ -1,0 +1,43 @@
+<main>
+  <p>Sign Up</p>
+  <form (submit)="submitForm($event)" [formGroup]="registerForm">
+    <div>
+      <input placeholder="First Name" formControlName="firstName">
+      <app-error *ngIf="firstNameError" [text]="firstNameError"></app-error>
+    </div>
+    <div>
+      <input placeholder="Last Name" formControlName="lastName">
+      <app-error *ngIf="lastNameError" [text]="lastNameError"></app-error>
+    </div>
+    <div>
+      <input placeholder="Email" type="email" formControlName="email">
+      <app-error *ngIf="emailError" [text]="emailError"></app-error>
+    </div>
+    <div>
+      <input placeholder="Mobile Phone" type="tel" formControlName="mobilePhone">
+      <app-error *ngIf="mobilePhoneError" [text]="mobilePhoneError"></app-error>
+    </div>
+    <div class="password">
+      <div>
+        <input placeholder="Password"
+               type="password"
+               appPasswordVisibility
+               formControlName="password">
+      </div>
+      <app-error *ngIf="passwordError" [text]="passwordError"></app-error>
+    </div>
+    <div class="password">
+      <div>
+        <input placeholder="Repeat Password"
+               type="password"
+               appPasswordVisibility
+               formControlName="passwordConfirmation">
+      </div>
+      <app-error *ngIf="passwordConfirmationError" [text]="passwordConfirmationError"></app-error>
+    </div>
+    <div class="buttons">
+      <input type="submit" value="Create Account">
+      <input type="reset" value="Clear" (click)="clearErrors()">
+    </div>
+  </form>
+</main>
