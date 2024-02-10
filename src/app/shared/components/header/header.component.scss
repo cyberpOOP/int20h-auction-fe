@@ -1,8 +1,60 @@
-.header-wrp{
+.header-wrp {
+  position: fixed;
+  top: 0;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  height: 105px;
+  height: 90px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.header-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+}
+
+.header-content.title:hover {
+  cursor: pointer;
+}
+
+.account-block {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  margin-right: 5px;
+}
+
+.avatar img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.user-info {
+  margin-right: 5px;
+}
+
+.toggle-btn {
+  margin-left: auto;
+}
+
+.element-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+
+.element-list li {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.element-list li:last-child {
+  border-bottom: none;
+}
