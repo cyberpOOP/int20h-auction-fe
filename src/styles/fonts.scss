@@ -1,0 +1,51 @@
+@use './colors.scss';
+
+@mixin h3-font {
+    font: 36px / 115% "RalewayExtraBold", sans-serif;
+    color: $black-100;
+}
+
+@mixin h4-font {
+    font: 22px / 115% "RalewayExtraBold", sans-serif;
+    color: $black-100;
+}
+
+@mixin h5-font {
+    font: 18px / auto "RalewayMedium", sans-serif;
+    color: $black-100;
+}
+
+@mixin h6-font {
+    font: 16px / 140% "RalewayBold", sans-serif;
+    color: $black-100;
+}
+
+@mixin body1-font {
+    font: 16px / 140% "RalewayRegular", sans-serif;
+    color: $black-100;
+}
+
+@mixin body2-font {
+    font: 14px / auto "RalewayRegular", sans-serif;
+    color: $black-100;
+}
+
+@mixin tub-font {
+    font: 18px / auto "RalewaySemiBold", sans-serif;
+    color: $black-100;
+}
+
+@mixin toggel-font {
+    font: 14px / auto "RalewaySemiBold", sans-serif;
+    color: $black-100;
+}
+
+@mixin button-font {
+    font: 16px / auto "RalewayBold", sans-serif;
+    color: $black-100;
+}
+
+@mixin caption-font {
+    font: 12px / auto "RalewayRegular", sans-serif;
+    color: $black-100;
+}
