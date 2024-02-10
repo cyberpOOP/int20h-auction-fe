@@ -9,21 +9,27 @@
      Тут шось буде піздате
   </div>
   <div class="header-content">
-    <div class="account-block">
+
+    <div class="login-block" *ngIf = "!isAuthorized">
+      <button class="authorize-btn" [routerLink]="['/auth']">Authorize</button>
+    </div>
+
+    <div class="account-block"  (click)="toggleList()" *ngIf="isAuthorized">
       <div class="avatar">
         <img src="favicon.ico" alt="User Avatar">
       </div>
       <div class="user-info">
         <p>User Name</p>
       </div>
-      <button class="toggle-btn" id="toggleListBtn">Show List</button>
-    </div>
-    <div class="account-list">
-      <ul class="element-list" id="elementList">
-        <li>Option 1</li>
-        <li>Option 2</li>
-        <li>Option 3</li>
-      </ul>
+      <button class="toggle-btn" id="toggleListBtn" [class.open]="isListVisible">
+        <span>▼</span>
+      </button>
+      <div class="account-list" *ngIf="isListVisible" (mouseleave)="hideList()">
+        <ul class="element-list" id="elementList">
+          <li>Log Out</li>
+          <li>Account Information</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

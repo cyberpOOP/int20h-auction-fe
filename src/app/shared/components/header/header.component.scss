@@ -1,3 +1,5 @@
+@import "src/styles/colors.scss";
+
 .header-wrp {
   position: fixed;
   top: 0;
@@ -24,6 +26,9 @@
   display: flex;
   align-items: center;
 }
+.account-block:hover {
+  cursor: pointer;
+}
 
 .avatar {
   margin-right: 5px;
@@ -40,21 +45,115 @@
 }
 
 .toggle-btn {
-  margin-left: auto;
+  cursor: pointer;
+  background-color: white;
+  color: #070101;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.toggle-btn.open {
+  color: $gray-300;
+  transform: rotate(180deg);
+}
+
+.toggle-btn span {
+  margin-right: 5px;
+}
+
+account-block{
+  position: relative;
+}
+
+.account-list {
+  position: fixed;
+  top: 80px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  transition: max-height 0.3s ease-out;
+}
+
+.account-list.open {
+  max-height: 200px;
 }
 
 .element-list {
   list-style: none;
-  padding: 0;
+  padding: 10px;
   margin: 0;
-  display: none;
 }
 
 .element-list li {
-  padding: 5px;
-  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.3s;
 }
 
-.element-list li:last-child {
-  border-bottom: none;
+.element-list li.active {
+  background-color: $gray-300;
+  color: #fff;
 }
+
+.element-list li:hover {
+  background-color: $gray-200;
+}
+
+.authorize-btn {
+  background-color: $gray-200;
+  border: 0 solid #E5E7EB;
+  box-sizing: border-box;
+  color: #000000;
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1.5rem;
+  padding: 0.5rem 1.25rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none #000000 solid;
+  text-decoration-thickness: auto;
+  width: 100%;
+  max-width: 360px;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.authorize-btn:focus {
+  outline: 0;
+}
+
+.authorize-btn:after {
+  content: '';
+  position: absolute;
+  border: 1px solid #000000;
+  bottom: 4px;
+  left: 4px;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+}
+
+.authorize-btn:hover:after {
+  bottom: 2px;
+  left: 2px;
+}
+
+@media (min-width: 768px) {
+  .authorize-btn {
+    padding: 0.5rem 2.25rem;
+    font-size: 1rem;
+    max-width: 320px;
+  }
+}
+
+
