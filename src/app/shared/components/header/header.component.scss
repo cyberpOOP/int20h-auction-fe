@@ -3,64 +3,50 @@
 .header-wrp {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   height: 90px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span {
+    padding: 0 20px;
+  }
+}
+
 .header-content {
+  padding: 0 40px;
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 100%;
-}
+  &:first-child:hover {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.2);
+  };
 
-.header-content.title:hover {
-  cursor: pointer;
+  &:last-child {
+    &:hover {
+      .account-list {
+        display: block;
+      }
+    }
+  }
 }
 
 .account-block {
   display: flex;
   align-items: center;
-}
-.account-block:hover {
-  cursor: pointer;
-}
-
-.avatar {
-  margin-right: 5px;
-}
-
-.avatar img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
-
-.user-info {
-  margin-right: 5px;
-}
-
-.toggle-btn {
-  cursor: pointer;
-  background-color: white;
-  color: #070101;
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background-color 0.3s, color 0.3s, transform 0.3s;
-}
 
-.toggle-btn.open {
-  color: $gray-300;
-  transform: rotate(180deg);
+  .avatar {
+    margin-right: 5px;
+  }
 }
-
 .toggle-btn span {
   margin-right: 5px;
 }
@@ -72,36 +58,37 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   transition: max-height 0.3s ease-out;
-}
+  min-width: 150px;
 
-.account-list.open {
-  max-height: 200px;
-}
+  &.open {
+    max-height: 200px;
+  }
 
-.element-list {
-  list-style: none;
-  padding: 10px;
-  margin: 0;
-}
+  .element-list {
+    list-style: none;
+    margin: 0;
 
-.element-list li {
-  cursor: pointer;
-  padding: 10px;
-  transition: background-color 0.3s;
-}
+    li {
+      cursor: pointer;
+      padding: 10px;
+      transition: background-color 0.3s;
 
-.element-list li.active {
-  background-color: $gray-300;
-  color: #fff;
-}
+      &.active {
+        background-color: $gray-300;
+        color: #fff;
+      }
 
-.element-list li:hover {
-  background-color: $gray-200;
+      &:hover {
+        background-color: $gray-200;
+      }
+    }
+  }
 }
 
 .authorize-btn {
   background-color: $gray-200;
-  border: 0 solid #E5E7EB;
+  border: 1px solid black;
+  border-radius: 50px;
   box-sizing: border-box;
   color: #000000;
   display: flex;
@@ -116,30 +103,18 @@
   text-decoration-thickness: auto;
   width: 100%;
   max-width: 360px;
-  position: relative;
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-}
 
-.authorize-btn:focus {
-  outline: 0;
-}
+  &:focus {
+    outline: 0;
+  }
 
-.authorize-btn:after {
-  content: '';
-  position: absolute;
-  border: 1px solid #000000;
-  bottom: 4px;
-  left: 4px;
-  width: calc(100% - 1px);
-  height: calc(100% - 1px);
-}
-
-.authorize-btn:hover:after {
-  bottom: 2px;
-  left: 2px;
+  &:hover {
+    background-color: rgba(0,0,0,0.2);
+  }
 }
 
 @media (min-width: 768px) {
@@ -149,5 +124,3 @@
     max-width: 320px;
   }
 }
-
-
