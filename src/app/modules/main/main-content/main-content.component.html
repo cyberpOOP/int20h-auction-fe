@@ -50,8 +50,8 @@
     </div>
   </div>
   <div class="custom-paginator">
-    <button (click)="prevPage()" [disabled]="currentPage === 1">&lt; Prev</button>
-    <span>{{ currentPage }} / {{ getTotalPages() }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage === getTotalPages()">Next &gt;</button>
+    <button (click)="prevPage()" [disabled]="productsData.Page === 1">&lt; Prev</button>
+    <span>{{ productsData.Page }} / {{ getTotalPages() }}</span>
+    <button (click)="nextPage()" [disabled]="productsData.Page === getTotalPages()">Next &gt;</button>
   </div>
 </div>

@@ -1,39 +1,45 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IProduct, ProductStatus} from "../../../models/IProduct";
+import {ProductService} from "@core/services/product.service";
+import {IProductFilter} from "../../../models/IProductFilter";
+import {IFilterResponse} from "../../../models/IFilterResponse";
 
 @Component({
     selector: 'app-main-content',
     templateUrl: './main-content.component.html',
     styleUrls: ['./main-content.component.scss'],
 })
-export class MainContentComponent {
+export class MainContentComponent implements OnInit{
   products: IProduct[]  = []
-
-  pageSize = 12;
-  currentPage = 1;
+  productFilter: IProductFilter = {
+    Take: 12,
+    Skip: 0
+  };
+  productsData: IFilterResponse
 
   getCurrentPageProducts() {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    return this.products.slice(startIndex, startIndex + this.pageSize);
+    if (this.productsData.Value != null)
+      return this.productsData.Value;
+    return [];
   }
 
   prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
+    if (this.productsData.Page > 1) {
+
     }
   }
 
   nextPage() {
-    if (this.currentPage < this.getTotalPages()) {
-      this.currentPage++;
+    if (this.productsData.Page < this.getTotalPages()) {
+
     }
   }
 
   getTotalPages() {
-    return Math.ceil(this.products.length / this.pageSize);
+    return Math.ceil(this.productsData.Count / this.productFilter.Take!);
   }
-  constructor() {
-    this.populateTestData();
+  constructor(private productService: ProductService) {
+
   }
 
   private populateTestData() {
@@ -56,4 +62,13 @@ export class MainContentComponent {
   }
 
   protected readonly ProductStatus = ProductStatus;
+
+  ngOnInit(): void {
+    this.productService.get(this.productFilter).subscribe(
+      (res) => {
+        console.log(res)
+        this.productsData = res;
+      }
+    );
+  }
 }
