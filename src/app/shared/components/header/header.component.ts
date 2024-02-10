@@ -1,22 +1,21 @@
-import { Component } from '@angular/core';
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
-  isListVisible = false;
+export class HeaderComponent implements OnInit {
   isAuthorized = true;
-  selectedAction: string | null = null;
+  currentUser: any;
 
-  toggleList() {
-    this.isListVisible = !this.isListVisible;
+  ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('user') as string);
   }
 
-  hideList() {
-    this.isListVisible = false;
+  logOut(){
+    localStorage.removeItem('user');
+    localStorage.removeItem('accessToken');
+    location.reload();
   }
-
 }

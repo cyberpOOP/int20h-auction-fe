@@ -11,6 +11,10 @@ const routes: Routes = [
         pathMatch: 'prefix',
         loadChildren: () => import('./modules/main/main.module').then((m) => m.MainModule),
     },
+  //   {
+  //     path: '**',
+  //     component: NotFoundComponent,
+  //   },
 ];
 
 @NgModule({

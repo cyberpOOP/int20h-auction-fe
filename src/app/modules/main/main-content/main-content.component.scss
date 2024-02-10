@@ -1,3 +1,193 @@
+@import "src/styles/colors.scss";
+
 .main-content {
-    margin: 50px 100px;
-  }
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.info-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.info-panel.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.info-panel.desc {
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-area {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+.search-field {
+  padding: 10px;
+  border: 1px solid #3498db;
+  border-radius: 5px;
+  width: 300px;
+  outline: none;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-field select {
+  padding: 10px;
+  border: 1px solid #3498db;
+  border-radius: 5px;
+  width: 200px;
+  outline: none;
+}
+
+.select-field {
+  background-color: #3498db;
+  color: #ecf0f1;
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.checkbox {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background-color: #ecf0f1;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background-color: #3498db;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.checkbox input {
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox input:checked + .checkmark {
+  opacity: 1;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  width: 90%;
+}
+
+.product-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.product-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.product-details {
+  text-align: left;
+}
+
+.product-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.product-price, .product-status, .product-end-date {
+  margin-bottom: 8px;
+}
+
+.look-button {
+  margin-bottom: 8px;
+}
+
+.bid-section {
+  margin-top: 8px;
+}
+
+.bid-button{
+  background-color: $gray-200;
+  font-size: 11px;
+  padding: 5px;
+  min-width: 30px;
+}
+
+.custom-paginator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.custom-paginator button {
+  background-color: white;
+  border: none;
+  color: black;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.custom-paginator button:hover {
+  color: $gray-300;
+}
+
+.custom-paginator button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.custom-paginator span {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+
+
