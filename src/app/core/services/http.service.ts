@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Injectable, isDevMode } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -12,8 +12,6 @@ export class HttpService {
     private headers: HttpHeaders;
 
     constructor(private httpClient: HttpClient) {
-        console.log(environment);
-        console.log(isDevMode());
         this.headers = new HttpHeaders({
             'Content-Type': 'application/json',
         });
