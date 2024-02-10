@@ -1,4 +1,18 @@
 <main>
   <p>Sign In</p>
-
+  <form (submit)="submitForm($event)" [formGroup]="loginForm">
+    <div>
+      <input placeholder="Email" type="email" formControlName="email">
+    </div>
+    <div class="password">
+      <div>
+        <input placeholder="Password" type="password" appPasswordVisibility formControlName="password">
+      </div>
+    </div>
+    <app-error *ngIf="error" [text]="error"></app-error>
+    <div class="buttons">
+      <input type="submit" value="Sign In">
+      <input type="reset" value="Clear">
+    </div>
+  </form>
 </main>

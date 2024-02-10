@@ -10,7 +10,7 @@ import { IUser } from '../../../models/IUser';
 @Component({
     selector: 'app-sign-up',
     templateUrl: './sign-up.component.html',
-    styleUrls: ['./sign-up.component.scss', '../auth-common-styles.scss'],
+    styleUrls: ['../auth-common-styles.scss'],
 })
 export class SignUpComponent {
   firstNameError: string;
@@ -124,21 +124,17 @@ export class SignUpComponent {
         this.dialog.open(ModalComponent, {
           data: {
             header: 'Success',
-            content: (result as any).value,
+            content: (result as any).message,
           },
         });
       },
       (error) => {
-        if ((error.error as any).status === 2) {
-          this.emailError = (error.error as any).value;
-        } else {
-          this.dialog.open(ModalComponent, {
-            data: {
-              header: 'Error',
-              content: (error.error as any).value,
-            },
-          });
-        }
+        this.dialog.open(ModalComponent, {
+          data: {
+            header: 'Error',
+            content: (error.error as any).message,
+          },
+        });
       },
     );
   }
