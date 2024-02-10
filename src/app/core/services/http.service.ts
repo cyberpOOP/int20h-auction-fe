@@ -15,9 +15,9 @@ export class HttpService {
         this.headers = new HttpHeaders({
             'Content-Type': 'application/json',
         });
-        
+
         const accessToken = localStorage.getItem('accessToken');
-        
+
         if (accessToken) {
             this.headers = this.headers.set('Authorization', `Bearer ${accessToken}`);
         }
@@ -27,33 +27,43 @@ export class HttpService {
         return this.httpClient.get<T>(this.buildUrl(url), { headers: this.headers }).pipe(catchError(this.handleError));
     }
 
-    getById<T>(url: string, id: string | number) {        
-        return this.httpClient.get<T>(`${this.buildUrl(url)}/${id}`, { headers: this.headers }).pipe(catchError(this.handleError));
+    getById<T>(url: string, id: string | number) {
+        return this.httpClient
+            .get<T>(`${this.buildUrl(url)}/${id}`, { headers: this.headers })
+            .pipe(catchError(this.handleError));
     }
 
     post<T>(url: string, resource: unknown) {
-        return this.httpClient.post<T>(this.buildUrl(url), resource, { headers: this.headers }).pipe(catchError(this.handleError));
+        return this.httpClient
+            .post<T>(this.buildUrl(url), resource, { headers: this.headers })
+            .pipe(catchError(this.handleError));
     }
 
     delete<T>(url: string, id: string | number, body?: T) {
         const options = {
             headers: this.headers,
-            body: body
+            body: body,
         };
 
         return this.httpClient.delete(`${this.buildUrl(url)}/${id}`, options).pipe(catchError(this.handleError));
     }
 
     put<T>(url: string, resource: T) {
-        return this.httpClient.put<T>(this.buildUrl(url), resource, { headers: this.headers }).pipe(catchError(this.handleError));
+        return this.httpClient
+            .put<T>(this.buildUrl(url), resource, { headers: this.headers })
+            .pipe(catchError(this.handleError));
     }
 
     patch<T>(url: string, resource: T) {
-        return this.httpClient.patch<T>(this.buildUrl(url), resource, { headers: this.headers }).pipe(catchError(this.handleError));
+        return this.httpClient
+            .patch<T>(this.buildUrl(url), resource, { headers: this.headers })
+            .pipe(catchError(this.handleError));
     }
 
     updateById<T>(url: string, id: string | number) {
-        return this.httpClient.put<T>(this.buildUrl(url), id, { headers: this.headers }).pipe(catchError(this.handleError));
+        return this.httpClient
+            .put<T>(this.buildUrl(url), id, { headers: this.headers })
+            .pipe(catchError(this.handleError));
     }
 
     private handleError(err: HttpErrorResponse) {
