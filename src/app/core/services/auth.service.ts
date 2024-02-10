@@ -7,17 +7,20 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { HttpService } from './http.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { IUser } from '../../models/IUser';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    public routePrefix = '/user';
+    controllerUrl: string;
 
     constructor(
         private httpService: HttpService,
         private jwtHelper: JwtHelperService,
-    ) {}
+    ) {
+      this.controllerUrl = 'api/auth';
+    }
 
     public getUserId(): string {
         const token = localStorage.getItem('accessToken');
@@ -38,31 +41,15 @@ export class AuthService {
         return !this.jwtHelper.isTokenExpired(token);
     }
 
-    //   signUp(user: ISignUpUser): Observable<IUserResponse> {
-    //     return this.httpService
-    //       .post<IUserResponse>(`${this.routePrefix}/signup`, user)
-    //       .pipe(
-    //         map((response) => {
-    //           const accessToken = response.accessToken;
-    //           localStorage.setItem('accessToken', String(accessToken));
-    //           return response;
-    //         })
-    //       );
-    //   }
+  signUp(user: IUser) {
+    return this.httpService.post(`${this.controllerUrl}/sign-up`, user);
+  }
 
-    //   signIn(user: ISignInUser): Observable<IUserResponse> {
-    //     return this.httpService
-    //       .post<IUserResponse>(`${this.routePrefix}/login`, user)
-    //       .pipe(
-    //         map((response) => {
-    //           const accessToken = response.accessToken;
-    //           localStorage.setItem('accessToken', String(accessToken));
-    //           return response;
-    //         })
-    //       );
-    //   }
+  signIn(user: IUser) {
+    return this.httpService.post(`${this.controllerUrl}/sign-in`, user);
+  }
 
-    logout() {
-        localStorage.removeItem('accessToken');
-    }
+  logout() {
+      localStorage.removeItem('accessToken');
+  }
 }
