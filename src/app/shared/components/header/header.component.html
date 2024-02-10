@@ -15,7 +15,7 @@
 
   <div class="account-block header-content" *ngIf="currentUser" >
     <div class="avatar">
-      <img src="favicon.ico" alt="User Avatar">
+      <img src="assets/images/avatar/avatar.svg" alt="User Avatar">
     </div>
     <div class="user-info">
       <span>{{currentUser.firstName}} {{currentUser.lastName}}</span>
@@ -23,7 +23,7 @@
     <div class="account-list">
       <ul class="element-list" id="elementList">
         <li (click)="this.logOut()">Log Out</li>
-        <li>Account Information</li>
+        <li [routerLink]="['/profile']">Account Information</li>
       </ul>
     </div>
   </div>
