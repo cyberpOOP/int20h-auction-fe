@@ -1,133 +1,129 @@
-@import "src/styles/colors.scss";
+@import 'src/styles/colors.scss';
+@import 'src/styles/fonts.scss';
 
 .header-wrp {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 90px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  span {
-    padding: 0 20px;
-  }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $white-100;
+    padding: 10px 20px;
+    box-shadow: 0px 0px 12px 15px $gray-100;
 }
 
 .header-content {
-  padding: 0 40px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 100%;
-  &:first-child:hover {
+    display: flex;
+    align-items: center;
+
+    &:last-child {
+        &:hover {
+            .account-list {
+                display: block;
+            }
+        }
+    }
+}
+
+.title {
     cursor: pointer;
-    background-color: rgba(0,0,0,0.2);
-  };
+    display: flex;
+    align-items: center;
 
-  &:last-child {
-    &:hover {
-      .account-list {
-        display: block;
-      }
-    }
-  }
-}
-
-.account-block {
-  display: flex;
-  align-items: center;
-  position: relative;
-
-  .avatar {
-    margin-right: 10px;
     img {
-      height: 40px;
-      width: 40px;
-      object-fit: cover;
-      border-radius: 50%;
+        width: 30px;
+        margin-right: 10px;
     }
-  }
-}
-.toggle-btn span {
-  margin-right: 5px;
-}
 
-.account-list {
-  display: none;
-  position: absolute;
-  top: 80px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  transition: max-height 0.3s ease-out;
-  min-width: 150px;
-
-  &.open {
-    max-height: 200px;
-  }
-
-  .element-list {
-    list-style: none;
-    margin: 0;
-
-    li {
-      cursor: pointer;
-      padding: 10px;
-      transition: background-color 0.3s;
-
-      &.active {
-        background-color: $gray-300;
-        color: #fff;
-      }
-
-      &:hover {
-        background-color: $gray-200;
-      }
+    span {
+        color: $gray-300;
+        @include tub-font;
     }
-  }
+}
+
+.login-block,
+.account-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .authorize-btn {
-  background-color: $gray-200;
-  border: 1px solid black;
-  border-radius: 50px;
-  box-sizing: border-box;
-  color: #000000;
-  display: flex;
-  font-size: 0.9rem;
-  font-weight: 700;
-  justify-content: center;
-  line-height: 1.5rem;
-  padding: 0.5rem 1.25rem;
-  position: relative;
-  text-align: center;
-  text-decoration: none #000000 solid;
-  text-decoration-thickness: auto;
-  width: 100%;
-  max-width: 360px;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+    background-color: $yellow-100;
+    color: $white-100;
+    padding: 13px 35px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    @include button-font;
 
-  &:focus {
-    outline: 0;
-  }
-
-  &:hover {
-    background-color: rgba(0,0,0,0.2);
-  }
+    &:active,
+    &:hover {
+        background-color: $yellow-200;
+    }
 }
 
-@media (min-width: 768px) {
-  .authorize-btn {
-    padding: 0.5rem 2.25rem;
-    font-size: 1rem;
-    max-width: 320px;
-  }
+.avatar {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 50%;
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.user-info {
+    span {
+        color: $black-100;
+        @include button-font;
+    }
+}
+
+.element-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.account-list {
+    display: none;
+    position: absolute;
+    top: 44px;
+    right: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    transition: max-height 0.3s ease-out;
+    min-width: 150px;
+
+    &:hover {
+        display: block;
+    }
+
+    &.open {
+        max-height: 200px;
+    }
+
+    .element-list {
+        list-style: none;
+        margin: 0;
+
+        li {
+            color: $black-100;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px;
+            transition: background-color 0.3s;
+
+            &.active {
+                background-color: $gray-300;
+            }
+
+            &:hover {
+                background-color: $gray-200;
+            }
+        }
+    }
 }

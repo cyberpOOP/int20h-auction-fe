@@ -1,0 +1,18 @@
+<form [formGroup]="editProductForm" (ngSubmit)="submitForm()">
+    <label for="title">Title:</label>
+    <input type="text" id="title" formControlName="title" required />
+
+    <label for="description">Description:</label>
+    <textarea id="description" formControlName="description" required></textarea>
+
+    <label for="minimalBid">Minimal Bid:</label>
+    <input type="number" id="minimalBid" formControlName="minimalBid" />
+
+    <label for="imageLinks">Image Links:</label>
+    <input type="text" id="imageLinks" formControlName="imageLinks" />
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" formControlName="endDate" />
+
+    <button type="submit">Edit Product</button>
+</form>

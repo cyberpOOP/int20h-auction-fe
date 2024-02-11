@@ -1,29 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
-@import "styles/fonts";
+@import 'styles/fonts';
+@import 'styles/colors';
 
 @font-face {
-    font-family: "RalewayExtraBold";
-    src: url("./assets/fonts/Raleway-ExtraBold.ttf");
+    font-family: 'RalewayExtraBold';
+    src: url('./assets/fonts/Raleway-ExtraBold.ttf');
 }
 
 @font-face {
-    font-family: "RalewayBold";
-    src: url("./assets/fonts/Raleway-Bold.ttf");
+    font-family: 'RalewayBold';
+    src: url('./assets/fonts/Raleway-Bold.ttf');
 }
 
 @font-face {
-    font-family: "RalewaySemiBold";
-    src: url("./assets/fonts/Raleway-SemiBold.ttf");
+    font-family: 'RalewaySemiBold';
+    src: url('./assets/fonts/Raleway-SemiBold.ttf');
 }
 
 @font-face {
-    font-family: "RalewayMedium";
-    src: url("./assets/fonts/Raleway-Medium.ttf");
+    font-family: 'RalewayMedium';
+    src: url('./assets/fonts/Raleway-Medium.ttf');
 }
 
 @font-face {
-    font-family: "RalewayRegular";
-    src: url("./assets/fonts/Raleway-Regular.ttf");
+    font-family: 'RalewayRegular';
+    src: url('./assets/fonts/Raleway-Regular.ttf');
 }
 
 * {
@@ -33,5 +34,34 @@
     @include body1-font;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+    background-color: $white-100;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $gray-200;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $gray-100;
+}
+
+::-webkit-scrollbar{
+    visibility: hidden;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
