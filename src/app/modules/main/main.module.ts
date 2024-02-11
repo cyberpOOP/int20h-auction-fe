@@ -33,7 +33,7 @@ import {ReactiveFormsModule} from "@angular/forms";
         NgIf,
         MatButtonModule,
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
 })
 export class MainModule {}

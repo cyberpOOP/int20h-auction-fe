@@ -28,4 +28,8 @@ export class ProductService {
     createProduct(productDto: ICreateProductDto) {
         return this.httpService.post(`${this.controllerUrl}`, productDto);
     }
+
+    editProduct(productDto: ICreateProductDto, id: string) {
+        return this.httpService.put(`${this.controllerUrl}/${id}`, productDto);
+    }
 }
