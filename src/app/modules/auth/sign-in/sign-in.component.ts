@@ -12,58 +12,58 @@ import { Router } from '@angular/router';
     styleUrls: ['../auth-common-styles.scss'],
 })
 export class SignInComponent {
-  error: string;
+    error: string;
 
-  loginForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-  });
+    loginForm = new FormGroup({
+        email: new FormControl(''),
+        password: new FormControl(''),
+    });
 
-  user: IUser = {
-    FirstName: '',
-    LastName: '',
-    Email: '',
-    Password: '',
-  };
+    user: IUser = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+    };
 
-  constructor(
-    private authService: AuthService,
-    private dialog: MatDialog,
-    private router: Router
-  ) {}
+    constructor(
+        private authService: AuthService,
+        private dialog: MatDialog,
+        private router: Router,
+    ) {}
 
-  submitForm(event: SubmitEvent) {
-    event.preventDefault();
-    this.signIn();
-  }
+    submitForm(event: SubmitEvent) {
+        event.preventDefault();
+        this.signIn();
+    }
 
-  private signIn() {
-    this.user.Email = this.email.value;
-    this.user.Password = this.password.value;
-    this.authService.signIn(this.user).subscribe(
-      (result) => {
-        const token = (result as any).value.accessToken;
-        const user = (result as any).value;
-        localStorage.setItem('accessToken', token);
-        localStorage.setItem('user', JSON.stringify(user));
-        this.router.navigate(['/']);
-      },
-      (error) => {
-        this.dialog.open(ModalComponent, {
-          data: {
-            header: 'Error',
-            content: (error.error as any).message,
-          },
-        });
-      },
-    );
-  }
+    private signIn() {
+        this.user.email = this.email.value;
+        this.user.password = this.password.value;
+        this.authService.signIn(this.user).subscribe(
+            (result) => {
+                const token = (result as any).value.accessToken;
+                const user = (result as any).value;
+                localStorage.setItem('accessToken', token);
+                localStorage.setItem('user', JSON.stringify(user));
+                this.router.navigate(['/']);
+            },
+            (error) => {
+                this.dialog.open(ModalComponent, {
+                    data: {
+                        header: 'Error',
+                        content: (error.error as any).message,
+                    },
+                });
+            },
+        );
+    }
 
-  get email(): FormControl {
-    return this.loginForm.get('email') as FormControl;
-  }
+    get email(): FormControl {
+        return this.loginForm.get('email') as FormControl;
+    }
 
-  get password(): FormControl {
-    return this.loginForm.get('password') as FormControl;
-  }
+    get password(): FormControl {
+        return this.loginForm.get('password') as FormControl;
+    }
 }

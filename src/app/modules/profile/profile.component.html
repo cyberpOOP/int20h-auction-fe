@@ -1,0 +1,28 @@
+<app-header></app-header>
+<main>
+  <div class="avatar">
+    <img src="assets/images/avatar/avatar.svg" alt="avatar">
+  </div>
+  <form (submit)="submitForm($event)" [formGroup]="updateForm">
+    <div>
+      <input placeholder="First Name" formControlName="firstName">
+      <app-error *ngIf="firstNameError" [text]="firstNameError"></app-error>
+    </div>
+    <div>
+      <input placeholder="Last Name" formControlName="lastName">
+      <app-error *ngIf="lastNameError" [text]="lastNameError"></app-error>
+    </div>
+    <div>
+      <input placeholder="Email" type="email" formControlName="email">
+      <app-error *ngIf="emailError" [text]="emailError"></app-error>
+    </div>
+    <div>
+      <input placeholder="Mobile Phone" type="tel" formControlName="mobilePhone">
+      <app-error *ngIf="mobilePhoneError" [text]="mobilePhoneError"></app-error>
+    </div>
+    <div class="buttons">
+      <input type="button" value="Delete Account" (click)="deleteAccount()">
+      <input type="submit" value="Save">
+    </div>
+  </form>
+</main>

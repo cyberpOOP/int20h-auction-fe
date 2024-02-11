@@ -19,7 +19,7 @@ export class AuthService {
         private httpService: HttpService,
         private jwtHelper: JwtHelperService,
     ) {
-      this.controllerUrl = 'api/auth';
+        this.controllerUrl = 'api/auth';
     }
 
     public getUserId(): string {
@@ -41,15 +41,20 @@ export class AuthService {
         return !this.jwtHelper.isTokenExpired(token);
     }
 
-  signUp(user: IUser) {
-    return this.httpService.post(`${this.controllerUrl}/sign-up`, user);
-  }
+    signUp(user: IUser) {
+        return this.httpService.post(`${this.controllerUrl}/sign-up`, user);
+    }
 
-  signIn(user: IUser) {
-    return this.httpService.post(`${this.controllerUrl}/sign-in`, user);
-  }
+    signIn(user: IUser) {
+        return this.httpService.post(`${this.controllerUrl}/sign-in`, user);
+    }
 
-  logout() {
-      localStorage.removeItem('accessToken');
-  }
+    refresh() {
+        return this.httpService.post(`${this.controllerUrl}/refresh`, null);
+    }
+
+    logout() {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('user');
+    }
 }

@@ -20,4 +20,8 @@ export class ProductService {
   get(filterProduct: IProductFilter): Observable<IFilterResponse>{
     return this.httpService.post<IFilterResponse>(`${this.controllerUrl}/get`, filterProduct);
   }
+
+  getOne(id: string) {
+    return this.httpService.get(`${this.controllerUrl}/${id}`);
+  }
 }

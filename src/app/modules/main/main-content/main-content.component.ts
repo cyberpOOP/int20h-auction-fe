@@ -50,7 +50,6 @@ export class MainContentComponent implements OnInit{
   }
 
   getTotalPages() {
-    console.log(this.productFilter)
     if (this.productsData.count > 0)
       return Math.ceil(this.productsData.count / this.productFilter.Take!);
     return 1;

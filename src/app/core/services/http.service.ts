@@ -48,6 +48,14 @@ export class HttpService {
         return this.httpClient.delete(`${this.buildUrl(url)}/${id}`, options).pipe(catchError(this.handleError));
     }
 
+    deleteNoBody<T>(url: string) {
+        const options = {
+            headers: this.headers,
+        };
+
+        return this.httpClient.delete(`${this.buildUrl(url)}`, options).pipe(catchError(this.handleError));
+    }
+
     put<T>(url: string, resource: T) {
         return this.httpClient
             .put<T>(this.buildUrl(url), resource, { headers: this.headers })

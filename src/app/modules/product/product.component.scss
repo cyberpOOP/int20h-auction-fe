@@ -1,0 +1,136 @@
+@import 'src/styles/colors.scss';
+@import 'src/styles/fonts.scss';
+
+.wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 40px;
+    margin-top: 50px;
+    padding: 0 100px;
+}
+
+.bids-info-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    gap: 10px;
+
+    .bid-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease;
+
+        &:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bidder-info {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .bidder-name {
+                font-weight: bold;
+            }
+
+            .bid-price {
+                padding: 5px 10px;
+                border-radius: 4px;
+                background-color: $green-200;
+                color: $yellow-200;
+            }
+        }
+    }
+}
+
+.product-info-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    .current-bid {
+        align-self: flex-end;
+        text-align: center;
+        border-radius: 4px;
+        background-color: $gray-100;
+        padding: 4px 20px;
+
+        p {
+            @include h3-font;
+            color: $green-200;
+        }
+
+        .current-bid-text {
+            @include toggel-font;
+            color: $gray-300;
+        }
+    }
+
+    & div.current-product {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    ul {
+        margin-left: 20px;
+    }
+
+    h3 {
+        @include h3-font;
+    }
+
+    .seller-info {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        border: 1px solid #dfdfdf;
+        border-radius: 10px;
+        padding: 26px;
+
+        .prop-name {
+            @include h6-font;
+        }
+
+        & > div {
+            display: flex;
+            gap: 30px;
+
+            & span:first-child {
+                width: 70px;
+            }
+        }
+    }
+
+    form {
+        display: flex;
+        justify-content: space-between;
+
+        input.input {
+            background-color: $gray-100;
+            border-radius: 10px;
+            padding: 14px 15px;
+            border: none;
+            outline-color: $gray-200;
+            @include body1-font;
+            color:  $black-100;
+        }
+
+        input.button {
+            cursor: pointer;
+            background-color: $yellow-100;
+            border-radius: 10px;
+            padding: 13px 35px;
+            border: none;
+            @include button-font;
+            color:  $white-100;
+
+            &:active, &:hover {
+                background-color: $yellow-200;
+            }
+        }
+    }
+}
