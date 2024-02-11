@@ -37,11 +37,14 @@ export class ProfileComponent implements OnInit {
         }),
     });
 
+    avatarUrl: string;
+
     user: IUser = {
         firstName: '',
         lastName: '',
         email: '',
         phone: '',
+        avatarUrl: ''
     };
 
     constructor(
@@ -56,6 +59,8 @@ export class ProfileComponent implements OnInit {
         this.user.lastName = user.lastName;
         this.user.email = user.email;
         this.user.phone = user.phone;
+        this.user.avatarUrl = user.avatarUrl ? user.avatarUrl : '';
+        this.avatarUrl = user.avatarUrl ? user.avatarUrl : 'assets/images/avatar/avatar.svg';
         this.updateMobilePhone(user.phone);
         this.updateFirstName(user.firstName);
         this.updateLastName(user.lastName);
@@ -204,5 +209,42 @@ export class ProfileComponent implements OnInit {
                 },
             );
         });
+    }
+
+    changeAvatar($event: Event) {
+        // @ts-ignore
+        const file = $event.target.files[0];
+
+        if (file) {
+            const formData = new FormData();
+
+            formData.append(file.name, file, `/${file.name}`);
+
+            this.userService.sendImage(formData).subscribe(
+                (result) => {
+                    localStorage.setItem('user', JSON.stringify((result as any).value));
+                    location.reload();
+                },
+                (error) => {
+                    console.log(error);
+                },
+            );
+        }
+    }
+
+    deletePhoto(){
+      const model = {
+        Url: this.avatarUrl
+      };
+
+      this.userService.deleteProfilePhoto(JSON.stringify(model)).subscribe(
+        (result) => {
+          localStorage.setItem('user', JSON.stringify((result as any).value));
+          location.reload();
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
     }
 }

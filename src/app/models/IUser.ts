@@ -4,6 +4,7 @@ export interface IUser {
     email?: string;
     password?: string;
     phone?: string;
+    avatarUrl? : string;
 }
 
 export interface IAccessToken {

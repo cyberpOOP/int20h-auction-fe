@@ -7,8 +7,30 @@ main {
   min-width: 500px;
   .avatar {
     min-width: 200px;
-    img {
+    position: relative;
+    .img-container{
+      position: absolute;
+      top: 100px;
+      background-color: white;
+      padding: 5px;
+      border: 1px solid black;
+      border-radius: 50px;
+      cursor: pointer;
+      &:hover{
+        background-color: $gray-200;
+      }
+      .img-button{
+        height: 40px;
+      }
+    }
+    .camera{
+      left: 100px;
+    }
+    .main-image {
       height: 150px;
+      width: 150px;
+      object-fit: cover;
+      border-radius: 50%;
     }
   }
 }
