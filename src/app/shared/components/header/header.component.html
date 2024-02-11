@@ -15,7 +15,7 @@
 
   <div class="account-block header-content" *ngIf="currentUser" >
     <div class="avatar">
-      <img src="assets/images/avatar/cat.jpeg" alt="User Avatar">
+      <img src="{{avatarUrl}}" alt="User Avatar">
     </div>
     <div class="user-info">
       <span>{{currentUser.firstName}} {{currentUser.lastName}}</span>

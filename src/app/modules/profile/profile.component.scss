@@ -16,6 +16,9 @@ main {
       border: 1px solid black;
       border-radius: 50px;
       cursor: pointer;
+      &:hover{
+        background-color: $gray-200;
+      }
       .img-button{
         height: 40px;
       }
