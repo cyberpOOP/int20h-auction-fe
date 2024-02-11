@@ -10,7 +10,7 @@ export interface IProduct {
     phone?: string | null;
     imageLinks?: string | null;
     status: ProductStatus;
-    endDate?: Date | null;
+    endDate?: string | null;
     sellerEmail: string;
     seller?: IUser;
     winnerEmail?: string | null;
