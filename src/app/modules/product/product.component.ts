@@ -41,6 +41,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
                 (result) => {
                     if ((result as IResponse<IProduct>).value !== undefined) {
                         this.product = (result as IResponse<IProduct>).value!;
+                        this.product.endDate = this.dateToDottedFormat(this.product.endDate || '');
                         this.isSeller = this.authService.getUserEmail() === this.product.seller?.email;
                         this.authService.isAuthenticated().subscribe((res) => {
                           this.isAuth = res;
@@ -58,6 +59,22 @@ export class ProductPageComponent implements OnInit, OnDestroy {
             );
         });
     }
+
+    dateToSeparateFormat = (date: string | Date): string[] => {
+        const targetDate = new Date(date);
+
+        const year = targetDate.getFullYear().toString();
+        const month = String(targetDate.getMonth() + 1).padStart(2, '0');
+        const day = String(targetDate.getDate()).padStart(2, '0');
+
+        return [day, month, year];
+    };
+
+    dateToDottedFormat = (date: string | Date): string => {
+        const [day, month, year] = this.dateToSeparateFormat(date);
+
+        return `${day}.${month}.${year}`;
+    };
 
     submitForm(event: SubmitEvent) {
         event.preventDefault();

@@ -1,7 +1,14 @@
 <app-header></app-header>
 <main>
   <div class="avatar">
-    <img src="assets/images/avatar/avatar.svg" alt="avatar">
+    <img src="assets/images/avatar/cat.jpeg" alt="avatar" class="main-image">
+    <div class="img-container bin">
+      <img src="assets/images/avatar/bin.svg" class="img-button" alt="bin">
+    </div>
+    <label for="fileInput" class="img-container camera">
+      <img src="assets/images/avatar/camera.svg" class="img-button" alt="camera">
+      <input id="fileInput" type="file" style="display: none;" (change)="changeAvatar($event)" accept="image/*">
+    </label>
   </div>
   <form (submit)="submitForm($event)" [formGroup]="updateForm">
     <div>

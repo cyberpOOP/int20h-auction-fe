@@ -33,6 +33,14 @@ export class HttpService {
             .pipe(catchError(this.handleError));
     }
 
+    postFile<T>(url: string, resource: unknown) {
+        const headers = new HttpHeaders();
+
+        return this.httpClient
+            .post<T>(this.buildUrl(url), resource, { headers: headers })
+            .pipe(catchError(this.handleError));
+    }
+
     delete<T>(url: string, id: string | number, body?: T) {
         const options = {
             headers: this.headers,

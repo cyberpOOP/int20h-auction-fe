@@ -205,4 +205,24 @@ export class ProfileComponent implements OnInit {
             );
         });
     }
+
+    changeAvatar($event: Event) {
+        // @ts-ignore
+        const file = $event.target.files[0];
+
+        if (file) {
+            const formData = new FormData();
+
+            formData.append(file.name, file, `/${file.name}`);
+
+            this.userService.sendImage(formData).subscribe(
+                (result) => {
+                    console.log(result);
+                },
+                (error) => {
+                    console.log(error);
+                },
+            );
+        }
+    }
 }
