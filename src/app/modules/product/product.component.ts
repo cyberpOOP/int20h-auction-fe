@@ -21,6 +21,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     public product: IProduct;
     private bid: ICreateBid;
     public isSeller: boolean;
+    public isAuth: boolean;
 
     bidForm = new FormGroup({
         bid: new FormControl(''),
@@ -41,6 +42,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
                     if ((result as IResponse<IProduct>).value !== undefined) {
                         this.product = (result as IResponse<IProduct>).value!;
                         this.isSeller = this.authService.getUserEmail() === this.product.seller?.email;
+                        this.isAuth = this.authService.isAuthenticated();
                     }
                 },
                 (error) => {
