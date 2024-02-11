@@ -4,10 +4,11 @@ import { Injectable } from '@angular/core';
 //   ISignUpUser,
 //   IUserResponse,
 // } from '@shared/models/user/user';
-import { Observable, map } from 'rxjs';
+import {Observable, map, of, ObservedValueTupleFromArray} from 'rxjs';
 import { HttpService } from './http.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { IUser } from '../../models/IUser';
+import {IAccessToken, IUser} from '../../models/IUser';
+import {IResponse, ResponseStatus} from "../../models/IResponse";
 
 @Injectable({
     providedIn: 'root',
@@ -48,11 +49,27 @@ export class AuthService {
         return '';
     }
 
-    public isAuthenticated(): boolean {
+    public isAuthenticated(): Observable<boolean> {
         const token = localStorage.getItem('accessToken');
-
-        return !this.jwtHelper.isTokenExpired(token);
+        if (this.jwtHelper.isTokenExpired(token)){
+          return this.checkAuthentication();
+        }
+        return of(true);
     }
+
+  private checkAuthentication(): Observable<boolean> {
+    return this.refresh().pipe(
+      map((res) => {
+        if ((res as IResponse<IAccessToken>).status == ResponseStatus.Error)
+        {
+          this.logout();
+          return false;
+        }
+        localStorage.setItem('accessToken', (res as IResponse<IAccessToken>).value?.accessToken || '');
+        return true;
+      })
+    );
+  }
 
     signUp(user: IUser) {
         return this.httpService.post(`${this.controllerUrl}/sign-up`, user);

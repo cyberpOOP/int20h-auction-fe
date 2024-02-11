@@ -42,7 +42,9 @@ export class ProductPageComponent implements OnInit, OnDestroy {
                     if ((result as IResponse<IProduct>).value !== undefined) {
                         this.product = (result as IResponse<IProduct>).value!;
                         this.isSeller = this.authService.getUserEmail() === this.product.seller?.email;
-                        this.isAuth = this.authService.isAuthenticated();
+                        this.authService.isAuthenticated().subscribe((res) => {
+                          this.isAuth = res;
+                        });
                     }
                 },
                 (error) => {
