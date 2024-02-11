@@ -128,13 +128,18 @@
 }
 
 .product-card {
-  border: 1px solid #ccc;
+  box-shadow: 0px 0px 15px 15px $gray-100;
   padding: 16px;
   border-radius: 8px;
   width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all 0.5s;
+
+  &:hover {
+    scale: 1.01;
+  }
 }
 
 .product-image {
