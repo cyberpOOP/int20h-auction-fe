@@ -2,7 +2,7 @@
 @import "src/styles/fonts";
 
 div{
-  margin: 0 20px;
+  margin: 0 10px;
   display: flex;
   color: $red-100;
 }
@@ -12,6 +12,6 @@ img{
 }
 
 span{
-  max-width: 200px;
+  max-width: 300px;
   @include caption-font;
 }

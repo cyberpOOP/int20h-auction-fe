@@ -1,3 +1,5 @@
+import { ProductStatus } from './IProduct';
+
 export interface IProductFilter {
     Title?: string | null;
     State?: string | null;
@@ -13,4 +15,13 @@ export interface ICreateProductDto {
     minimalBid?: number;
     imageLinks?: string;
     endDate?: Date;
+}
+
+export interface IEditProductDto {
+    title: string;
+    description: string;
+    minimalBid?: number;
+    imageLinks?: string;
+    endDate?: Date;
+    status: ProductStatus;
 }

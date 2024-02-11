@@ -14,5 +14,12 @@
     <label for="endDate">End Date:</label>
     <input type="date" id="endDate" formControlName="endDate" />
 
+    <label for="status">Status:</label>
+    <select id="status" formControlName="status">
+        <option *ngFor="let status of productStatusOptions" [value]="status">
+            {{ getStatus(status) }}
+        </option>
+    </select>
+
     <button type="submit">Edit Product</button>
 </form>
