@@ -29,6 +29,8 @@ export class NewProductComponent {
         });
     }
 
+    imageUrl: string = "assets/images/product/product.png";
+
     submitForm() {
         if (this.createProductForm.valid) {
             const createProductDto: ICreateProductDto = this.createProductForm.value;
@@ -55,4 +57,28 @@ export class NewProductComponent {
             });
         }
     }
+
+  addProductPhoto($event: Event){
+    // @ts-ignore
+    const file = $event.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+
+      formData.append(file.name, file, `/${file.name}`);
+
+      this.productService.sendImage(formData).subscribe(
+        (result) => {
+          const url = (result as any).value.url;
+          this.createProductForm.patchValue({
+            imageLinks: url
+          });
+          this.imageUrl = url;
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    }
+  }
 }

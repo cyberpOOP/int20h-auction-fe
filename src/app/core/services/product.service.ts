@@ -32,4 +32,8 @@ export class ProductService {
     editProduct(productDto: ICreateProductDto, id: string) {
         return this.httpService.put(`${this.controllerUrl}/${id}`, productDto);
     }
+
+    sendImage(formData: FormData) {
+      return this.httpService.postFile(`${this.controllerUrl}/addPhoto`, formData);
+    }
 }
