@@ -41,7 +41,7 @@
         <div class="product-price">Price: ${{ product.price }}</div>
         <div class="product-status">Status: {{ ProductStatus[product.status] }}</div>
         <div class="product-end-date" *ngIf="product.endDate">End Date: {{ product.endDate | date }}</div>
-        <button mat-button color="primary" class="look-button">Look At</button>
+        <button mat-button color="primary" class="look-button" [routerLink]="['/product', product.id]">Look At</button>
         <div fxLayout="row" fxLayoutGap="8px" class="bid-section">
           <input matInput placeholder="Enter your bid" class="bid-input">
           <button mat-raised-button class="bid-button">Fast Bid</button>
