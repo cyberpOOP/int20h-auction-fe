@@ -12,7 +12,16 @@ import { ProfileModule } from '@modules/profile/profile.module';
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, CoreModule, AuthModule, MainModule, ProfileModule],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        SharedModule,
+        CoreModule,
+        AuthModule,
+        MainModule,
+        ProfileModule,
+    ],
     providers: [],
     bootstrap: [AppComponent],
 })
