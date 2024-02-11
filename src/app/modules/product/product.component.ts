@@ -19,6 +19,7 @@ import { IResponse } from 'src/app/models/IResponse';
 export class ProductPageComponent implements OnInit, OnDestroy {
     private routeSub: Subscription;
     public product: IProduct;
+    private productId: string;
     private bid: ICreateBid;
     public isSeller: boolean;
     public isAuth: boolean;
@@ -39,6 +40,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.routeSub = this.route.params.subscribe((params) => {
+            this.productId = params['id'];
             this.productService.getOne(params['id']).subscribe(
                 (result) => {
                     if ((result as IResponse<IProduct>).value !== undefined) {
@@ -94,10 +96,33 @@ export class ProductPageComponent implements OnInit, OnDestroy {
         this.bidService.placeABid(this.bid).subscribe(
             (result) => {
                 if ((result as IResponse<IProduct>).value !== undefined) {
-                    this.product = (result as IResponse<IProduct>).value!;
                     this.bidForm = new FormGroup({
                         bid: new FormControl(''),
                     });
+                    this.productService.getOne(this.productId).subscribe(
+                        (result) => {
+                            if ((result as IResponse<IProduct>).value !== undefined) {
+                                this.product = (result as IResponse<IProduct>).value!;
+                                this.product.endDate =
+                                    this.product.endDate != null
+                                        ? this.dateToDottedFormat(this.product.endDate || '')
+                                        : null;
+                                this.isSeller = this.authService.getUserEmail() === this.product.seller?.email;
+                                this.authService.isAuthenticated().subscribe((res) => {
+                                    this.isAuth = res;
+                                });
+                                this.isActive = this.product.status == ProductStatus.Active;
+                            }
+                        },
+                        (error) => {
+                            this.dialog.open(ModalComponent, {
+                                data: {
+                                    header: 'Error',
+                                    content: (error.error as any).message,
+                                },
+                            });
+                        },
+                    );
                 }
             },
             (error) => {
