@@ -6,6 +6,7 @@ import { matchpassword } from '@core/validators/matchpassword.validator';
 import { emailFormatRegex, mobilePhoneFormatRegex, nameFormatRegex, passFormatRegex } from '@core/utils/regex.util';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { IUser } from '../../../models/IUser';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-sign-up',
@@ -63,6 +64,7 @@ export class SignUpComponent {
     constructor(
         private authService: AuthService,
         private dialog: MatDialog,
+        private router: Router,
     ) {}
 
     submitForm(event: SubmitEvent) {
@@ -127,6 +129,11 @@ export class SignUpComponent {
                         content: (result as any).message,
                     },
                 });
+                const token = (result as any).value.accessToken;
+                const user = (result as any).value;
+                localStorage.setItem('accessToken', token);
+                localStorage.setItem('user', JSON.stringify(user));
+                this.router.navigate(['/']);
             },
             (error) => {
                 this.dialog.open(ModalComponent, {
