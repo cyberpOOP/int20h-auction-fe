@@ -1,5 +1,6 @@
 import { IBid } from './IBid';
 import { IUser } from './IUser';
+import {IUserProduct} from "./IUserProduct";
 
 export interface IProduct {
     id?: string;
@@ -16,6 +17,7 @@ export interface IProduct {
     winnerEmail?: string | null;
     winner?: IUser | null;
     bids?: IBid[];
+    users?: IUserProduct[]
 }
 
 export enum ProductStatus {

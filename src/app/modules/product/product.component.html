@@ -1,13 +1,6 @@
 <div *ngIf="product" class="wrapper">
-    <div class="bids-info-wrapper">
-        <div *ngFor="let bid of product.bids?.reverse()" class="bid-card">
-            <div class="bidder-info">
-                <div class="bidder-name">{{ bid.bidder.firstName }} {{ bid.bidder.lastName }}</div>
-                <div class="bid-price">
-                    {{ bid.price | currency: 'UAH' }}
-                </div>
-            </div>
-        </div>
+    <div class="image-wrapper">
+      <img [src]="product.imageLinks" alt="" class="image-product">
     </div>
     <div class="product-info-wrapper">
         <div class="current-bid">
@@ -19,8 +12,8 @@
 
             <div>
                 <ul>
-                    <li>{{ product.description }}</li>
-                    <li>{{  product.endDate }}</li>
+                    <li *ngIf="product.description != null">{{ product.description }}</li>
+                    <li *ngIf="product.endDate != null">{{  product.endDate }}</li>
                 </ul>
             </div>
 
@@ -50,4 +43,25 @@
             </form>
         </div>
     </div>
+</div>
+<div class="wrapper">
+  <div class="block-info-wrapper large">
+    <div *ngFor="let bid of product.bids?.reverse()" class="bid-card">
+      <div class="bidder-info">
+        <div class="bidder-name">{{ bid.bidder.email}}</div>
+        <div class="bid-price">
+          {{ bid.price | currency: 'UAH' }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="block-info-wrapper">
+    <div *ngFor="let user of product.users?.reverse()" class="bid-card">
+      <div class="bidder-info">
+        <div class="email">{{user.email}}</div>
+        <div class="max-bid">Max Bid: {{user.maxBid}}</div>
+        <div class="bid-count">Bid count: {{user.bidCount}}</div>
+      </div>
+    </div>
+  </div>
 </div>
