@@ -25,6 +25,6 @@ export class UserService {
     }
 
     deleteProfilePhoto(model: string) {
-        return this.httpService.deleteNoId<string>('/deletePhoto', model);
+        return this.httpService.deleteNoId<string>(`${this.controllerUrl}/deletePhoto`, model);
     }
 }
