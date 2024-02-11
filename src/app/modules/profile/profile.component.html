@@ -1,8 +1,8 @@
 <app-header></app-header>
 <main>
   <div class="avatar">
-    <img src="assets/images/avatar/cat.jpeg" alt="avatar" class="main-image">
-    <div class="img-container bin">
+    <img src="{{avatarUrl}}" alt="avatar" class="main-image">
+    <div class="img-container bin" *ngIf="user.avatarUrl" (click)="deletePhoto()">
       <img src="assets/images/avatar/bin.svg" class="img-button" alt="bin">
     </div>
     <label for="fileInput" class="img-container camera">
