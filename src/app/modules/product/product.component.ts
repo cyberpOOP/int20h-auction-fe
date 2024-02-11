@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '@core/services/auth.service';
 import { BidService } from '@core/services/bid.service';
 import { ProductService } from '@core/services/product.service';
 import { ModalComponent } from '@shared/components/modal/modal.component';
@@ -15,16 +16,18 @@ import { IResponse } from 'src/app/models/IResponse';
     templateUrl: './product.component.html',
     styleUrls: ['./product.component.scss'],
 })
-export class ProductPageComponent implements OnInit {
+export class ProductPageComponent implements OnInit, OnDestroy {
     private routeSub: Subscription;
     public product: IProduct;
     private bid: ICreateBid;
+    public isSeller: boolean;
 
     bidForm = new FormGroup({
         bid: new FormControl(''),
     });
 
     constructor(
+        private authService: AuthService,
         private productService: ProductService,
         private dialog: MatDialog,
         private route: ActivatedRoute,
@@ -37,7 +40,7 @@ export class ProductPageComponent implements OnInit {
                 (result) => {
                     if ((result as IResponse<IProduct>).value !== undefined) {
                         this.product = (result as IResponse<IProduct>).value!;
-                        console.log(this.product);
+                        this.isSeller = this.authService.getUserEmail() === this.product.seller?.email;
                     }
                 },
                 (error) => {
@@ -65,8 +68,10 @@ export class ProductPageComponent implements OnInit {
 
         this.bidService.placeABid(this.bid).subscribe(
             (result) => {
-                // this.product.price
-                console.log(result);
+                if ((result as IResponse<IProduct>).value !== undefined) {
+                    this.product = (result as IResponse<IProduct>).value!;
+                    console.log(this.product);
+                }
             },
             (error) => {
                 this.dialog.open(ModalComponent, {
@@ -77,5 +82,9 @@ export class ProductPageComponent implements OnInit {
                 });
             },
         );
+    }
+
+    ngOnDestroy(): void {
+        this.routeSub.unsubscribe();
     }
 }

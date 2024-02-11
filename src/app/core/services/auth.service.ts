@@ -35,6 +35,19 @@ export class AuthService {
         return '';
     }
 
+    public getUserEmail(): string {
+        const token = localStorage.getItem('accessToken');
+
+        if (token && !this.jwtHelper.isTokenExpired(token)) {
+            const decodedToken = this.jwtHelper.decodeToken(token);
+            if (decodedToken && decodedToken.email) {
+                return decodedToken.email;
+            }
+        }
+
+        return '';
+    }
+
     public isAuthenticated(): boolean {
         const token = localStorage.getItem('accessToken');
 

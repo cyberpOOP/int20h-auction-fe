@@ -116,7 +116,7 @@
             border: none;
             outline-color: $gray-200;
             @include body1-font;
-            color:  $black-100;
+            color: $black-100;
         }
 
         input.button {
@@ -126,10 +126,16 @@
             padding: 13px 35px;
             border: none;
             @include button-font;
-            color:  $white-100;
+            color: $white-100;
 
-            &:active, &:hover {
+            &:active,
+            &:hover {
                 background-color: $yellow-200;
+            }
+
+            &:disabled {
+                cursor: default;
+                background-color: $gray-300;
             }
         }
     }
