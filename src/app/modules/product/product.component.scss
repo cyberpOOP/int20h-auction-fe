@@ -4,16 +4,26 @@
 .wrapper {
     display: flex;
     justify-content: space-evenly;
-    gap: 40px;
+    gap: 50px;
     margin-top: 50px;
     padding: 0 100px;
 }
 
-.bids-info-wrapper {
+.image-wrapper{
+  flex-grow: 1;
+  max-width: 50%;
+}
+
+.image-product{
+  border-radius: 5%;
+  width: 100%;
+  height: auto;
+}
+
+.block-info-wrapper {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    margin-top: auto;
     gap: 10px;
 
     .bid-card {
@@ -42,6 +52,9 @@
                 background-color: $green-200;
                 color: $yellow-200;
             }
+          .email {
+            font-weight: bold;
+          }
         }
     }
 }
