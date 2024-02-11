@@ -103,6 +103,23 @@
     opacity: 1;
 }
 
+.submit-button {
+  background-color: white;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.submit-button:hover {
+  background-color: #ddd;
+}
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -111,10 +128,12 @@
 }
 
 .product-card {
-    border: 1px solid #ccc;
-    padding: 16px;
-    border-radius: 8px;
-    width: 300px;
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-image {
