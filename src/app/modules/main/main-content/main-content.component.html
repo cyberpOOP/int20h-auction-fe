@@ -1,57 +1,59 @@
 <div class="main-content" fxLayout="column" fxLayoutGap="20px">
-  <div class="info-panel">
-    <div class="info-panel title">Welcome to our youth Ukrainian auction platform! Here, we bring together talented young individuals for the sale of not just cool items but also the talented ideas of their creators. A portion of the proceeds from profits goes to support the Armed Forces of Ukraine.</div>
-    <div class="info-panel desc">
-      <div class="info-panel title">Here you can find something interesting even more easily!</div>
-      <div class="search-area">
-        <input class="search-field" placeholder="Search by Title">
-        <div class="filter-field">
-          Auction state:
-          <select>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-          </select>
+    <div class="info-panel">
+        <div class="info-panel title">
+            Welcome to our youth Ukrainian auction platform! Here, we bring together talented young individuals for the
+            sale of not just cool items but also the talented ideas of their creators. A portion of the proceeds from
+            profits goes to support the Armed Forces of Ukraine.
         </div>
+        <div class="info-panel desc">
+            <div class="info-panel title">Here you can find something interesting even more easily!</div>
+            <div class="search-area">
+                <input class="search-field" placeholder="Search by Title" />
+                <div class="filter-field">
+                    Auction state:
+                    <select>
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                    </select>
+                </div>
 
-        <div class="filter-field">
-          Order by:
-          <select>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-          </select>
+                <div class="filter-field">
+                    Order by:
+                    <select>
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                    </select>
+                </div>
+                <div class="checkbox-container">
+                    <label class="checkbox">
+                        <input type="checkbox" />
+                        <div class="checkmark"></div>
+                    </label>
+                    <span>Only with my Bids</span>
+                </div>
+            </div>
         </div>
-        <div class="checkbox-container">
-          <label class="checkbox">
-            <input type="checkbox">
-            <div class="checkmark"></div>
-          </label>
-          <span>Only with my Bids</span>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <div class="product-grid">
-    <div *ngFor="let product of getCurrentPageProducts()" class="product-card">
-      <img [src]="product.imageLinks" alt="Product Image" class="product-image">
-      <div class="product-details">
-        <div class="product-title">{{ product.title }}</div>
-        <div class="product-price">Price: ${{ product.price }}</div>
-        <div class="product-status">Status: {{ ProductStatus[product.status] }}</div>
-        <div class="product-end-date" *ngIf="product.endDate">End Date: {{ product.endDate | date }}</div>
-        <button mat-button color="primary" class="look-button" [routerLink]="['/product', product.id]">Look At</button>
-        <div fxLayout="row" fxLayoutGap="8px" class="bid-section">
-          <input matInput placeholder="Enter your bid" class="bid-input">
-          <button mat-raised-button class="bid-button">Fast Bid</button>
+    <div class="product-grid">
+        <div *ngFor="let product of getCurrentPageProducts()" class="product-card">
+            <img [src]="product.imageLinks" alt="Product Image" class="product-image" />
+            <div class="product-details">
+                <div class="product-title">{{ product.title }}</div>
+                <div [class]="['product-status', ProductStatus[product.status]]">{{ ProductStatus[product.status] }}</div>
+                <div class="product-end-date" *ngIf="product.endDate">End Date: {{ product.endDate | date }}</div>
+                <div class="bid-section">
+                    <span>{{ product.price | currency: 'UAH' }}</span>
+                    <button class="look-button" [routerLink]="['/product', product.id]">Look At</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="custom-paginator">
-    <button (click)="prevPage()" [disabled]="currentPage === 1">&lt; Prev</button>
-    <span>{{ currentPage }} / {{ getTotalPages() }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage === getTotalPages()">Next &gt;</button>
-  </div>
+    <div class="custom-paginator">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">&lt; Prev</button>
+        <span>{{ currentPage }} / {{ getTotalPages() }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === getTotalPages()">Next &gt;</button>
+    </div>
 </div>
