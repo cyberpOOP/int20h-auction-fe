@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { UserService } from '@core/services/user.service';
 import { AuthService } from '@core/services/auth.service';
+import { base64ToFile } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-profile',
@@ -189,17 +190,37 @@ export class ProfileComponent implements OnInit{
         return;
       }
 
-      this.userService.deleteProfile().subscribe(result => {
-        this.authService.logout();
-        location.reload();
-      }, error => {
-        this.dialog.open(ModalComponent, {
-          data: {
-            header: 'Error',
-            content: "Something went wrong",
+      this.userService.deleteProfile().subscribe(
+          (result) => {
+              this.authService.logout();
+              location.reload();
           },
-        });
-      });
+          (error) => {
+              this.dialog.open(ModalComponent, {
+                  data: {
+                      header: 'Error',
+                      content: 'Something went wrong',
+                  },
+              });
+          },
+      );
     });
+  }
+
+  changeAvatar($event: Event){
+    // @ts-ignore
+    const file = $event.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+
+      formData.append(file.name, file, `/${file.name}`);
+
+      this.userService.sendImage(formData).subscribe(result =>{
+          console.log(result);
+      }, error => {
+          console.log(error);
+      });
+    }
   }
 }

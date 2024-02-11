@@ -19,4 +19,8 @@ export class UserService {
   deleteProfile() {
     return this.httpService.deleteNoBody(`${this.controllerUrl}`);
   }
+
+  sendImage(formData: FormData) {
+    return this.httpService.postFile(`${this.controllerUrl}/addPhoto`, formData)
+  }
 }
