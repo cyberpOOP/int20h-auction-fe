@@ -83,5 +83,5 @@ export class MainContentComponent implements OnInit{
   }
 
 
-  protected readonly ProductStatus = ProductStatus;
+    protected readonly ProductStatus = ProductStatus;
 }

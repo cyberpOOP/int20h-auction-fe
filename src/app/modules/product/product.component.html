@@ -44,9 +44,9 @@
             </div>
 
             <form (submit)="submitForm($event)" [formGroup]="bidForm">
-                <input class="input" placeholder="Enter the bid amount" type="text" formControlName="bid" inputmode="numeric" pattern="[0-9]*" />
+                <input class="input" placeholder="Enter the bid amount" type="text" formControlName="bid" inputmode="numeric" pattern="[0-9]*" [readonly]="isSeller || !isAuth" [disabled]="isSeller || !isAuth" />
 
-                <input class="button" type="submit" value="+ Place Bid" />
+                <input class="button" type="submit" value="+ Place Bid" [disabled]="isSeller || !isAuth" />
             </form>
         </div>
     </div>

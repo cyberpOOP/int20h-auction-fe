@@ -3,7 +3,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
-import { DatePipe, NgForOf, NgIf } from '@angular/common';
+import { CommonModule, DatePipe, NgForOf, NgIf } from '@angular/common';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -17,22 +17,23 @@ import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [MainComponent, MainContentComponent],
-  imports: [
-    SharedModule,
-    MainRoutingModule,
-    MatCheckboxModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatInputModule,
-    NgForOf,
-    MatPaginatorModule,
-    FlexLayoutModule,
-    MatExpansionModule,
-    DatePipe,
-    NgIf,
-    MatButtonModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        SharedModule,
+        MainRoutingModule,
+        MatCheckboxModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatInputModule,
+        NgForOf,
+        MatPaginatorModule,
+        FlexLayoutModule,
+        MatExpansionModule,
+        DatePipe,
+        NgIf,
+        MatButtonModule,
+        CommonModule,
+        ReactiveFormsModule
+    ],
 })
 export class MainModule {}
