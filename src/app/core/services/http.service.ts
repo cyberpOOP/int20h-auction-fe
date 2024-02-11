@@ -15,12 +15,6 @@ export class HttpService {
         this.headers = new HttpHeaders({
             'Content-Type': 'application/json',
         });
-
-        const accessToken = localStorage.getItem('accessToken');
-
-        if (accessToken) {
-            this.headers = this.headers.set('Authorization', `Bearer ${accessToken}`);
-        }
     }
 
     get<T>(url: string): Observable<T> {
