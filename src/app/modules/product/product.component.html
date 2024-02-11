@@ -15,12 +15,16 @@
             <p class="current-bid-text">Current bid</p>
         </div>
         <div class="current-product">
-            <h3>{{ product.title }}</h3>
-
+            <div class="title-wrapper">
+                <h3>{{ product.title }}</h3>
+                <button *ngIf="isSeller" class="edit-button" [routerLink]="['/product', product.id, 'edit']">
+                    Edit product
+                </button>
+            </div>
             <div>
                 <ul>
                     <li>{{ product.description }}</li>
-                    <li>{{  product.endDate }}</li>
+                    <li>{{ product.endDate }}</li>
                 </ul>
             </div>
 
@@ -44,9 +48,21 @@
             </div>
 
             <form (submit)="submitForm($event)" [formGroup]="bidForm">
-                <input class="input" placeholder="Enter the bid amount" type="text" formControlName="bid" inputmode="numeric" pattern="[0-9]*" [readonly]="isSeller || !isAuth" [disabled]="isSeller || !isAuth" />
+                <input
+                    class="input"
+                    placeholder="Enter the bid amount"
+                    type="text"
+                    formControlName="bid"
+                    inputmode="numeric"
+                    pattern="[0-9]*"
+                    [readonly]="isSeller || !isAuth"
+                    [disabled]="isSeller || !isAuth" />
 
-                <input class="button" type="submit" value="+ Place Bid" [disabled]="isSeller || !isAuth || !bidForm.value.bid?.length" />
+                <input
+                    class="button"
+                    type="submit"
+                    value="+ Place Bid"
+                    [disabled]="isSeller || !isAuth || !bidForm.value.bid?.length" />
             </form>
         </div>
     </div>

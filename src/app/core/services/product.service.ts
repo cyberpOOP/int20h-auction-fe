@@ -3,7 +3,7 @@ import { HttpService } from '@core/services/http.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ICreateProductDto, IProductFilter } from '../../models/IProductFilter';
 import { IFilterResponse } from '../../models/IFilterResponse';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -27,5 +27,9 @@ export class ProductService {
 
     createProduct(productDto: ICreateProductDto) {
         return this.httpService.post(`${this.controllerUrl}`, productDto);
+    }
+
+    editProduct(productDto: ICreateProductDto, id: string) {
+        return this.httpService.put(`${this.controllerUrl}/${id}`, productDto);
     }
 }
