@@ -37,17 +37,15 @@
   </div>
 
   <div class="product-grid">
-    <div class="product-grid">
       <div *ngFor="let product of getCurrentPageProducts()" class="product-card">
           <img [src]="product.imageLinks" alt="Product Image" class="product-image" />
           <div class="product-details">
-              <div class="product-title">{{ product.title }}</div>
-              <div [class]="['product-status', ProductStatus[product.status]]">{{ ProductStatus[product.status] }}</div>
-              <div class="product-end-date" *ngIf="product.endDate">End Date: {{ product.endDate | date }}</div>
-              <div class="bid-section">
-                  <span>{{ product.price | currency: 'UAH' }}</span>
-                  <button class="look-button" [routerLink]="['/product', product.id]">Look At</button>
-              </div>
+          <div class="product-title">{{ product.title }}</div>
+          <div [class]="['product-status', ProductStatus[product.status]]">{{ ProductStatus[product.status] }}</div>
+          <div class="product-end-date" *ngIf="product.endDate">End Date: {{ product.endDate | date }}</div>
+          <div class="bid-section">
+              <span>{{ product.price | currency: 'UAH' }}</span>
+              <button class="look-button" [routerLink]="['/product', product.id]">Look At</button>
           </div>
       </div>
     </div>
