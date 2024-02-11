@@ -5,11 +5,19 @@ import { ProfileRoutingModule } from '@modules/profile/profile-routing.module';
 import { SharedModule } from '@shared/shared.module';
 import { DirectivesModule } from '@core/directives/directives.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 
 @NgModule({
     declarations: [ProfileComponent],
-    imports: [CommonModule, ProfileRoutingModule, SharedModule, DirectivesModule, ReactiveFormsModule],
+    imports: [
+        CommonModule,
+        ProfileRoutingModule,
+        SharedModule,
+        DirectivesModule,
+        ReactiveFormsModule,
+        ImageCropperModule,
+    ],
 })
 export class ProfileModule {}
