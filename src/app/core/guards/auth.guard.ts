@@ -8,9 +8,7 @@ import {
     UrlTree,
 } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
-import {map, Observable, of, tap} from 'rxjs';
-import { IResponse, ResponseStatus } from 'src/app/models/IResponse';
-import { IAccessToken } from 'src/app/models/IUser';
+import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
@@ -19,19 +17,17 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         private router: Router,
     ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.authService.isAuthenticated().pipe(
-      tap(isAuthenticated => {
-        if (!isAuthenticated) {
-          this.router.navigate(['/auth']);
-        }
-      })
-    );
-  }
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+        return this.authService.isAuthenticated().pipe(
+            tap((isAuthenticated) => {
+                if (!isAuthenticated) {
+                    this.router.navigate(['/auth']);
+                }
+            }),
+        );
+    }
 
-
-
-  canActivateChild(
+    canActivateChild(
         childRoute: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
     ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {

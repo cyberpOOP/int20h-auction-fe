@@ -3,25 +3,24 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+    styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isAuthorized = true;
-  currentUser: any;
-  avatarUrl: string;
+    isAuthorized = true;
+    currentUser: any;
+    avatarUrl: string;
 
-  ngOnInit() {
-    this.avatarUrl = "assets/images/avatar/avatar.svg";
-    this.currentUser = JSON.parse(localStorage.getItem('user') as string);
-    if(this.currentUser && this.currentUser.avatarUrl){
-      this.avatarUrl = this.currentUser.avatarUrl;
+    ngOnInit() {
+        this.avatarUrl = 'assets/images/avatar/avatar.svg';
+        this.currentUser = JSON.parse(localStorage.getItem('user') as string);
+        if (this.currentUser && this.currentUser.avatarUrl) {
+            this.avatarUrl = this.currentUser.avatarUrl;
+        }
     }
-    console.log(this.avatarUrl);
-  }
 
-  logOut(){
-    localStorage.removeItem('user');
-    localStorage.removeItem('accessToken');
-    location.reload();
-  }
+    logOut() {
+        localStorage.removeItem('user');
+        localStorage.removeItem('accessToken');
+        location.reload();
+    }
 }
