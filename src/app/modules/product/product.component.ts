@@ -41,10 +41,11 @@ export class ProductPageComponent implements OnInit, OnDestroy {
                 (result) => {
                     if ((result as IResponse<IProduct>).value !== undefined) {
                         this.product = (result as IResponse<IProduct>).value!;
-                        this.product.endDate = this.product.endDate != null? this.dateToDottedFormat(this.product.endDate || ''): null;
+                        this.product.endDate =
+                            this.product.endDate != null ? this.dateToDottedFormat(this.product.endDate || '') : null;
                         this.isSeller = this.authService.getUserEmail() === this.product.seller?.email;
                         this.authService.isAuthenticated().subscribe((res) => {
-                          this.isAuth = res;
+                            this.isAuth = res;
                         });
                     }
                 },
