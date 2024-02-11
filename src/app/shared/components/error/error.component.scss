@@ -1,7 +1,10 @@
+@import "src/styles/colors";
+@import "src/styles/fonts";
+
 div{
   margin: 0 20px;
   display: flex;
-  color: red;
+  color: $red-100;
 }
 
 img{
@@ -10,4 +13,5 @@ img{
 
 span{
   max-width: 200px;
+  @include caption-font;
 }

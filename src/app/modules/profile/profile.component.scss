@@ -1,85 +1,115 @@
 @import 'src/styles/colors';
+@import 'src/styles/fonts';
 
 main {
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  min-width: 500px;
-  .avatar {
-    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.avatar {
     position: relative;
-    .img-container{
-      position: absolute;
-      top: 100px;
-      background-color: white;
-      padding: 5px;
-      border: 1px solid black;
-      border-radius: 50px;
-      cursor: pointer;
-      &:hover{
-        background-color: $gray-200;
-      }
-      .img-button{
-        height: 40px;
-      }
-    }
-    .camera{
-      left: 100px;
-    }
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
     .main-image {
-      height: 150px;
-      width: 150px;
-      object-fit: cover;
-      border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
     }
-  }
-}
 
-p {
-  color: $white-100;
-  text-align: center;
-  padding: 20px 20px 0 20px;
-  font-size: 32px;
-}
+    .img-container {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
 
-form{
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: $green-100;
-  border-radius: 40px;
-}
+        &:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
 
-input{
-  margin: 20px 10px 0 10px;
-  padding: 15px;
-  border-radius: 50px;
-  font-size: 20px;
-  background-color: $gray-100;
-  border: 2px solid $black-100;
-  color: $black-100;
-  &:focus{
-    border: 2px solid $black-100;
-  }
-  &[type=submit],&[type=button]{
-    background-color: $black-100;
-    color: $gray-100;
-    cursor: pointer;
-    &:hover{
-      background-color: darken($black-100, 10%);
+        .img-button {
+            width: 20px;
+            height: 20px;
+        }
     }
-  }
-  &[type=button] {
-    background-color: $red-100;
-  }
+
+    .bin {
+        background-color: $red-100;
+        color: $white-100;
+    }
+
+    .camera {
+        background-color: $yellow-100;
+        color: $white-100;
+        right: 0;
+    }
 }
 
-.buttons{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-bottom: 10px;
+form {
+    width: 100%;
+    max-width: 400px;
 }
 
+form > div {
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    background-color: $gray-100;
+    border-radius: 10px;
+    padding: 14px 15px;
+    border: none;
+    outline-color: $gray-200;
+    @include body1-font;
+    color: $black-100;
+
+    &[type='submit'],
+    &[type='reset'] {
+        background-color: $black-100;
+        color: $gray-100;
+        cursor: pointer;
+        &:hover {
+            background-color: darken($black-100, 10%);
+        }
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    input {
+      &[type='submit'] {
+          background-color: $black-100;
+          color: $gray-100;
+          cursor: pointer;
+          &:hover {
+              background-color: darken($black-100, 10%);
+          }
+      }
+      
+      &[type='button'] {
+          background-color: $red-100;
+          color: $gray-100;
+          cursor: pointer;
+          &:hover {
+              background-color: darken($red-100, 10%);
+          }
+      }
+    }
+}

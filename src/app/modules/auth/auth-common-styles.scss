@@ -43,13 +43,22 @@ input {
     @include body1-font;
     color: $black-100;
 
-    &[type='submit'],
-    &[type='reset'] {
+    &[type='submit'] {
         background-color: $black-100;
         color: $gray-100;
         cursor: pointer;
         &:hover {
             background-color: darken($black-100, 10%);
+        }
+    }
+    
+    
+    &[type='reset'] {
+        background-color: $gray-200;
+        color: $black-100;
+        cursor: pointer;
+        &:hover {
+            background-color: darken($gray-200, 10%);
         }
     }
 }
