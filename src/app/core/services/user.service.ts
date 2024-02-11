@@ -23,4 +23,8 @@ export class UserService {
     sendImage(formData: FormData) {
         return this.httpService.postFile(`${this.controllerUrl}/addPhoto`, formData);
     }
+
+    deleteProfilePhoto(model: string) {
+        return this.httpService.deleteNoId<string>('/deletePhoto', model);
+    }
 }
