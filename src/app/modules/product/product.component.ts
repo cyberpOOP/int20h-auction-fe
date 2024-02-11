@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 import { BidService } from '@core/services/bid.service';
 import { ProductService } from '@core/services/product.service';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { Subscription } from 'rxjs';
 import { ICreateBid } from 'src/app/models/IBid';
-import { IProduct } from 'src/app/models/IProduct';
+import { IProduct, ProductStatus } from 'src/app/models/IProduct';
 import { IResponse } from 'src/app/models/IResponse';
 
 @Component({
@@ -22,6 +22,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     private bid: ICreateBid;
     public isSeller: boolean;
     public isAuth: boolean;
+    public isActive: boolean;
 
     bidForm = new FormGroup({
         bid: new FormControl(''),
@@ -32,6 +33,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
         private productService: ProductService,
         private dialog: MatDialog,
         private route: ActivatedRoute,
+        private router: Router,
         private bidService: BidService,
     ) {}
 
@@ -47,6 +49,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
                         this.authService.isAuthenticated().subscribe((res) => {
                             this.isAuth = res;
                         });
+                        this.isActive = this.product.status == ProductStatus.Active;
                     }
                 },
                 (error) => {
@@ -106,6 +109,10 @@ export class ProductPageComponent implements OnInit, OnDestroy {
                 });
             },
         );
+    }
+
+    deleteProduct() {
+        this.productService.deleteProduct(this.product.id || '').subscribe(() => this.router.navigate(['/']));
     }
 
     ngOnDestroy(): void {

@@ -185,3 +185,21 @@
         background-color: $yellow-200;
     }
 }
+
+.delete-button {
+    align-self: flex-start;
+    position: relative;
+    top: 5px;
+    cursor: pointer;
+    background-color: $red-100;
+    border-radius: 7px;
+    padding: 8px 20px;
+    border: none;
+    @include button-font;
+    color: $white-100;
+
+    &:active,
+    &:hover {
+        background-color: darken($red-100, 10);
+    }
+}

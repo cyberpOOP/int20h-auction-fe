@@ -2,12 +2,12 @@ import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '@core/services/product.service';
 import { ModalComponent } from '@shared/components/modal/modal.component';
-import { Subscription, endWith } from 'rxjs';
-import { IProduct } from 'src/app/models/IProduct';
-import { ICreateProductDto } from 'src/app/models/IProductFilter';
+import { Subscription } from 'rxjs';
+import { IProduct, ProductStatus } from 'src/app/models/IProduct';
+import { IEditProductDto } from 'src/app/models/IProductFilter';
 import { IResponse } from 'src/app/models/IResponse';
 
 @Component({
@@ -20,6 +20,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     editProductForm: FormGroup;
     public product: IProduct;
     private productId: string;
+    productStatusOptions = Object.keys(ProductStatus).filter((value) => !isNaN(Number(value)));
 
     constructor(
         private fb: FormBuilder,
@@ -34,6 +35,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
             minimalBid: [null],
             imageLinks: [''],
             endDate: [null],
+            status: [null, Validators.required],
         });
     }
 
@@ -51,6 +53,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
                             minimalBid: this.product.minimalBid || 0,
                             imageLinks: this.product.imageLinks || '',
                             endDate: this.product.endDate,
+                            status: this.product.status,
                         });
                     }
                 },
@@ -68,8 +71,9 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
     submitForm() {
         if (this.editProductForm.valid) {
-            const createProductDto: ICreateProductDto = this.editProductForm.value;
-            this.productService.editProduct(createProductDto, this.productId).subscribe(
+            const editProductDto: IEditProductDto = this.editProductForm.value;
+            editProductDto.status = Number(editProductDto.status);
+            this.productService.editProduct(editProductDto, this.productId).subscribe(
                 (_) => {
                     this.location.back();
                 },
@@ -82,7 +86,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
                     });
                 },
             );
-            console.log(createProductDto);
+            console.log(editProductDto);
         } else {
             this.dialog.open(ModalComponent, {
                 data: {
@@ -91,6 +95,10 @@ export class EditProductComponent implements OnInit, OnDestroy {
                 },
             });
         }
+    }
+
+    getStatus(status: string) {
+        return ProductStatus[status as keyof typeof ProductStatus];
     }
 
     ngOnDestroy(): void {
