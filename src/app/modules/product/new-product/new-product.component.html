@@ -8,8 +8,12 @@
     <label for="minimalBid">Minimal Bid:</label>
     <input type="number" id="minimalBid" formControlName="minimalBid" />
 
-    <label for="imageLinks">Image Links:</label>
-    <input type="text" id="imageLinks" formControlName="imageLinks" />
+    <label>Image</label>
+    <img src="{{imageUrl}}" alt="Product" class="product-image">
+    <label for="fileInput" class="file-chooser">
+      <div class="file-chooser-div">Choose a file</div>
+      <input id="fileInput" type="file" style="display: none;" (change)="addProductPhoto($event)" accept="image/*">
+    </label>
 
     <label for="endDate">End Date:</label>
     <input type="date" id="endDate" formControlName="endDate" />

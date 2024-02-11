@@ -33,6 +33,10 @@ export class ProductService {
         return this.httpService.put(`${this.controllerUrl}/${id}`, productDto);
     }
 
+    sendImage(formData: FormData) {
+      return this.httpService.postFile(`${this.controllerUrl}/addPhoto`, formData);
+    }
+
     deleteProduct(id: string) {
         return this.httpService.delete(`${this.controllerUrl}`, id);
     }
