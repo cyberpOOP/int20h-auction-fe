@@ -2,38 +2,59 @@
 @import "src/styles/fonts.scss";
 
 form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+}
+
+label {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+input, textarea, button {
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.file-chooser {
+  background-color: $blue-100;
+  padding: 10px;
+  border-radius: 5px;
+  color: $white-100;
+  cursor: pointer;
+  &:hover {
+    background-color: $blue-200;
   }
-  
-  label {
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  
-  input, textarea, button {
-    margin-top: 5px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  textarea {
-    resize: vertical;
-  }
-  
-  button {
-    background-color: $yellow-100;
-    color: #fff;
-    cursor: pointer;
-    @include button-font;
-  }
-  
-  button:hover {
-    background-color: $yellow-200;
-  }
-  
+}
+
+.product-image {
+  border-radius: 10px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  background-color: $yellow-100;
+  color: #fff;
+  cursor: pointer;
+  @include button-font;
+}
+
+input[type=file] {
+  background-color: $blue-100;
+  color: #fff;
+  cursor: pointer;
+  @include button-font;
+}
+
+button:hover {
+  background-color: $yellow-200;
+}
