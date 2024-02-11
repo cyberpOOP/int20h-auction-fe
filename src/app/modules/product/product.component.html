@@ -51,15 +51,16 @@
                     formControlName="bid"
                     inputmode="numeric"
                     pattern="[0-9]*"
-                    [readonly]="isSeller || !isAuth"
-                    [disabled]="isSeller || !isAuth" />
+                    [readonly]="isSeller || !isAuth || !isActive"
+                    [disabled]="isSeller || !isAuth || !isActive" />
                 <input
                     class="button"
                     type="submit"
                     value="+ Place Bid"
-                    [disabled]="isSeller || !isAuth || !bidForm.value.bid?.length" />
+                    [disabled]="isSeller || !isAuth || !bidForm.value.bid?.length || !isActive" />
             </form>
             <app-error *ngIf="isSeller" text="You cannot bid on your product"></app-error>
+            <app-error *ngIf="!isActive" text="You cannot bid not active product"></app-error>
         </div>
     </div>
 </div>
