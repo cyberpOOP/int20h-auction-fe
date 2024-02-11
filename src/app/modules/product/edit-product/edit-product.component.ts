@@ -21,6 +21,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     public product: IProduct;
     private productId: string;
     productStatusOptions = Object.keys(ProductStatus).filter((value) => !isNaN(Number(value)));
+    imageUrl: string;
 
     constructor(
         private fb: FormBuilder,
@@ -55,6 +56,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
                             endDate: this.product.endDate,
                             status: this.product.status,
                         });
+                        this.imageUrl = this.product.imageLinks || '';
                     }
                 },
                 (error) => {
@@ -104,4 +106,28 @@ export class EditProductComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.routeSub.unsubscribe();
     }
+
+  addProductPhoto($event: Event){
+    // @ts-ignore
+    const file = $event.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+
+      formData.append(file.name, file, `/${file.name}`);
+
+      this.productService.sendImage(formData).subscribe(
+        (result) => {
+          const url = (result as any).value.url;
+          this.editProductForm.patchValue({
+            imageLinks: url
+          });
+          this.imageUrl = url;
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    }
+  }
 }
