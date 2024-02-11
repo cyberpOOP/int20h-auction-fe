@@ -1,7 +1,7 @@
 <div class="container">
   <mat-dialog-content class="header-container" *ngIf="!!data.header">
     <div class="header">{{data.header}}</div>
-    <mat-icon mat-dialog-close="true" class="close">close</mat-icon>
+    <mat-icon mat-dialog-close="false" class="close">close</mat-icon>
   </mat-dialog-content>
   <mat-dialog-content *ngIf="!!data.content"><div class="content">{{data.content}}</div></mat-dialog-content>
   <ng-container *ngIf="!!data.component">
