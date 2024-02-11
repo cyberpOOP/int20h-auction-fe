@@ -1,0 +1,53 @@
+<div *ngIf="product" class="wrapper">
+    <div class="bids-info-wrapper">
+        <div *ngFor="let bid of product.bids?.reverse()" class="bid-card">
+            <div class="bidder-info">
+                <div class="bidder-name">{{ bid.bidder.firstName }} {{ bid.bidder.lastName }}</div>
+                <div class="bid-price">
+                    {{ bid.price | currency: 'UAH' }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-info-wrapper">
+        <div class="current-bid">
+            <p>{{ product.price | currency: 'UAH' }}</p>
+            <p class="current-bid-text">Current bid</p>
+        </div>
+        <div class="current-product">
+            <h3>{{ product.title }}</h3>
+
+            <div>
+                <ul>
+                    <li>{{ product.description }}</li>
+                    <li>{{ product.endDate }}</li>
+                </ul>
+            </div>
+
+            <div class="seller-info">
+                <div>
+                    <span class="prop-name">Seller</span>
+
+                    <span>
+                        {{ product.seller?.firstName }}
+                        {{ product.seller?.lastName }}
+                    </span>
+                </div>
+                <div>
+                    <span class="prop-name">Contact</span>
+
+                    <span>
+                        {{ product.seller?.email }}
+                        {{ product.seller?.phone }}
+                    </span>
+                </div>
+            </div>
+
+            <form (submit)="submitForm($event)" [formGroup]="bidForm">
+                <input class="input" placeholder="Enter the bid amount" type="text" formControlName="bid" inputmode="numeric" pattern="[0-9]*" [readonly]="isSeller || !isAuth" [disabled]="isSeller || !isAuth" />
+
+                <input class="button" type="submit" value="+ Place Bid" [disabled]="isSeller || !isAuth || !bidForm.value.bid?.length" />
+            </form>
+        </div>
+    </div>
+</div>

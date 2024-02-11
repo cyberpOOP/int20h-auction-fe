@@ -1,59 +1,87 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {IProduct, ProductStatus} from "../../../models/IProduct";
+import {ProductService} from "@core/services/product.service";
+import {IProductFilter} from "../../../models/IProductFilter";
+import {IFilterResponse} from "../../../models/IFilterResponse";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'app-main-content',
     templateUrl: './main-content.component.html',
     styleUrls: ['./main-content.component.scss'],
 })
-export class MainContentComponent {
-  products: IProduct[]  = []
-
-  pageSize = 12;
-  currentPage = 1;
+export class MainContentComponent implements OnInit{
+  states: string[] = ["", "Pending", "Active", "Closed", "Cancelled", "Sold"]
+  orderBy: string[] = ["", "Title", "Price", "MinimalBid", "EndDate"]
+  productFilterForm: FormGroup;
+  productFilter: IProductFilter = {
+    Title: null,
+    State: null,
+    OrderBy: null,
+    OnlyWithMyBids: false,
+    Skip: 0,
+    Take: 12
+  };
+  productsData: IFilterResponse = {
+    count: 0,
+    page: 1,
+    skip: 0,
+    value: []
+  }
 
   getCurrentPageProducts() {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    return this.products.slice(startIndex, startIndex + this.pageSize);
+    if (this.productsData.value != null)
+      return this.productsData.value;
+    return [];
   }
 
   prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
+    if (this.productsData.page > 1) {
+      this.productFilter.Skip! -= this.productFilter.Take!;
+      this.fetchProducts();
     }
   }
 
   nextPage() {
-    if (this.currentPage < this.getTotalPages()) {
-      this.currentPage++;
+    if (this.productsData.page < this.getTotalPages()) {
+      this.productFilter.Skip! += this.productFilter.Take!;
+      this.fetchProducts();
     }
   }
 
   getTotalPages() {
-    return Math.ceil(this.products.length / this.pageSize);
+    if (this.productsData.count > 0)
+      return Math.ceil(this.productsData.count / this.productFilter.Take!);
+    return 1;
   }
-  constructor() {
-    this.populateTestData();
-  }
-
-  private populateTestData() {
-    for (let i = 1; i <= 50; i++) {
-      const product: IProduct = {
-        title: `Product ${i}`,
-        description: `Description for Product ${i}`,
-        price: 10 * i,
-        minimalBid: 50 * i,
-        phone: `123-456-${i}`,
-        imageLinks: `https://th.bing.com/th/id/OIP.iSu2RcCcdm78xbxNDJMJSgHaEo?rs=1&pid=ImgDetMain`,
-        status: ProductStatus.Active,
-        endDate: new Date(`2022-12-${i}`),
-        sellerEmail: `seller${i}@example.com`,
-        winnerEmail: i % 2 === 0 ? `winner${i}@example.com` : null,
-      };
-
-      this.products.push(product);
-    }
+  constructor(private productService: ProductService, private fb: FormBuilder) {
+    this.productFilterForm = this.fb.group({
+      'Title': [this.productFilter.Title],
+      'State': [this.productFilter.State],
+      'OrderBy': [this.productFilter.OrderBy],
+      'OnlyWithMyBids': [this.productFilter.OnlyWithMyBids]
+    });
   }
 
-  protected readonly ProductStatus = ProductStatus;
+  fetchProducts() {
+    this.productService.get(this.productFilter).subscribe(
+      (res) => {
+        this.productsData = res;
+      }
+    );
+  }
+
+  ngOnInit(): void {
+    this.fetchProducts();
+  }
+  submitForm() {
+    this.productFilter.OnlyWithMyBids = this.productFilterForm.value.OnlyWithMyBids
+    this.productFilter.OrderBy = this.productFilterForm.value.OrderBy
+    this.productFilter.Title = this.productFilterForm.value.Title
+    this.productFilter.State = this.productFilterForm.value.State
+    this.fetchProducts();
+  }
+
+
+    protected readonly ProductStatus = ProductStatus;
 }
