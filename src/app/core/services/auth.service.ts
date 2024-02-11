@@ -19,7 +19,7 @@ export class AuthService {
         private httpService: HttpService,
         private jwtHelper: JwtHelperService,
     ) {
-      this.controllerUrl = 'api/auth';
+        this.controllerUrl = 'api/auth';
     }
 
     public getUserId(): string {
@@ -35,22 +35,39 @@ export class AuthService {
         return '';
     }
 
+    public getUserEmail(): string {
+        const token = localStorage.getItem('accessToken');
+
+        if (token && !this.jwtHelper.isTokenExpired(token)) {
+            const decodedToken = this.jwtHelper.decodeToken(token);
+            if (decodedToken && decodedToken.email) {
+                return decodedToken.email;
+            }
+        }
+
+        return '';
+    }
+
     public isAuthenticated(): boolean {
         const token = localStorage.getItem('accessToken');
 
         return !this.jwtHelper.isTokenExpired(token);
     }
 
-  signUp(user: IUser) {
-    return this.httpService.post(`${this.controllerUrl}/sign-up`, user);
-  }
+    signUp(user: IUser) {
+        return this.httpService.post(`${this.controllerUrl}/sign-up`, user);
+    }
 
-  signIn(user: IUser) {
-    return this.httpService.post(`${this.controllerUrl}/sign-in`, user);
-  }
+    signIn(user: IUser) {
+        return this.httpService.post(`${this.controllerUrl}/sign-in`, user);
+    }
 
-  logout() {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('user');
-  }
+    refresh() {
+        return this.httpService.post(`${this.controllerUrl}/refresh`, null);
+    }
+
+    logout() {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('user');
+    }
 }

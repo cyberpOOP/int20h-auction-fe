@@ -1,7 +1,11 @@
 export interface IUser {
-  FirstName: string;
-  LastName: string;
-  Email?: string;
-  Password?: string;
-  Phone?: string;
+    firstName: string;
+    lastName: string;
+    email?: string;
+    password?: string;
+    phone?: string;
+}
+
+export interface IAccessToken {
+    accessToken: string;
 }
