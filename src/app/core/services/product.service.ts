@@ -32,4 +32,8 @@ export class ProductService {
     editProduct(productDto: ICreateProductDto, id: string) {
         return this.httpService.put(`${this.controllerUrl}/${id}`, productDto);
     }
+
+    deleteProduct(id: string) {
+        return this.httpService.delete(`${this.controllerUrl}`, id);
+    }
 }

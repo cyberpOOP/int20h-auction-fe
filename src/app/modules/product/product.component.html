@@ -13,6 +13,9 @@
                 <button *ngIf="isSeller" class="edit-button" [routerLink]="['/product', product.id, 'edit']">
                     Edit product
                 </button>
+                <button *ngIf="isSeller" class="delete-button" (click)="deleteProduct()">
+                    Delete product
+                </button>
             </div>
             <div>
                 <ul>

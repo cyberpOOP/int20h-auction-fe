@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 import { BidService } from '@core/services/bid.service';
 import { ProductService } from '@core/services/product.service';
@@ -32,6 +32,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
         private productService: ProductService,
         private dialog: MatDialog,
         private route: ActivatedRoute,
+        private router: Router,
         private bidService: BidService,
     ) {}
 
@@ -106,6 +107,10 @@ export class ProductPageComponent implements OnInit, OnDestroy {
                 });
             },
         );
+    }
+
+    deleteProduct() {
+        this.productService.deleteProduct(this.product.id || '').subscribe(() => this.router.navigate(['/']));
     }
 
     ngOnDestroy(): void {
