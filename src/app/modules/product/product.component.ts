@@ -72,7 +72,9 @@ export class ProductPageComponent implements OnInit, OnDestroy {
             (result) => {
                 if ((result as IResponse<IProduct>).value !== undefined) {
                     this.product = (result as IResponse<IProduct>).value!;
-                    console.log(this.product);
+                    this.bidForm = new FormGroup({
+                        bid: new FormControl(''),
+                    });
                 }
             },
             (error) => {
